@@ -1,5 +1,6 @@
 name: CI Pipeline
 
+# Trigger workflow on push or pull request to main/develop
 on:
   push:
     branches: 
@@ -8,6 +9,11 @@ on:
   pull_request:
     branches: 
       - main
+
+# Permissions needed for check runs
+permissions:
+  contents: read
+  checks: write
 
 jobs:
   build:
@@ -30,9 +36,11 @@ jobs:
           --health-retries=5
 
     steps:
+      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Set up JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -40,45 +48,58 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Make Maven Wrapper Executable
-        run: chmod +x ./soft_school/mvnw
-
-      - name: Build and Test with Maven
-        run: |
-          cd soft_school
-          ./mvnw clean test
+      # Build and test Maven project
+      - name: Build and test with Maven
+        run: ./soft_school/mvnw clean verify
         env:
           SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/soft_school
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: postgres
 
+      # Generate Jacoco code coverage
       - name: Generate Code Coverage Report
-        run: |
-          cd soft_school
-          ./mvnw jacoco:report
+        run: ./soft_school/mvnw jacoco:report
         continue-on-error: true
 
-      - name: Upload Test Results
+      # Upload coverage to Codecov
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./soft_school/target/site/jacoco/jacoco.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+
+      # Archive test results
+      - name: Archive Test Results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: soft_school/target/surefire-reports/
+          path: ./soft_school/target/surefire-reports/
+          retention-days: 90
 
-      - name: Upload Code Coverage Report
+      # Archive code coverage report
+      - name: Archive Code Coverage Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
-          path: soft_school/target/site/jacoco/
+          path: ./soft_school/target/site/jacoco/
+          retention-days: 90
 
-      - name: Build Docker Image
-        if: success()
-        run: |
-          cd soft_school
-          docker build -t softschool:${{ github.sha }} -t softschool:latest .
-          echo "Docker image built successfully"
-
+      # Publish test results as a check run
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          files: soft_school/target/surefire-reports/*.xml
+          files: ./soft_school/target/surefire-reports/*.xml
           check_name: Unit Test Results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Build Docker image
+      - name: Build Docker Image
+        if: success()
+        run: |
+          docker build -t softschool:${{ github.sha }} -t softschool:latest ./soft_school
+          echo "Docker image built successfully"
