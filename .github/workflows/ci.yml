@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    name: Build and Test
+    name: Build, Test & Dockerize
     runs-on: ubuntu-latest
 
     services:
@@ -61,7 +61,7 @@ jobs:
 
       - name: Archive Test Results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: target/surefire-reports/
@@ -69,7 +69,7 @@ jobs:
 
       - name: Archive Code Coverage Report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
           path: target/site/jacoco/
@@ -81,15 +81,9 @@ jobs:
           docker build -t softschool:${{ github.sha }} -t softschool:latest .
           echo "Docker image built successfully"
 
-      - name: Publish Test Results
+      - name: Publish Unit Test Results
         if: always()
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: target/surefire-reports/*.xml
           check_name: Unit Test Results
-
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v4  # change from v3 to v4
-        with:
-          name: test-results
-          path: target/surefire-reports/
