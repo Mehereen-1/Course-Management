@@ -50,7 +50,8 @@ jobs:
 
       # Build and test using Maven wrapper
       - name: Build and Test
-        run: ./soft_school/mvnw clean verify
+        working-directory: ./soft_school
+        run: ./mvnw clean verify
         env:
           SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/soft_school
           SPRING_DATASOURCE_USERNAME: postgres
