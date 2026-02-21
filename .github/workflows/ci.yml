@@ -40,50 +40,45 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build and test with Maven
-        run: ./mvnw clean verify
+      - name: Make Maven Wrapper Executable
+        run: chmod +x ./soft_school/mvnw
+
+      - name: Build and Test with Maven
+        run: |
+          cd soft_school
+          ./mvnw clean test
         env:
           SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/soft_school
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: postgres
 
       - name: Generate Code Coverage Report
-        run: ./mvnw jacoco:report
+        run: |
+          cd soft_school
+          ./mvnw jacoco:report
         continue-on-error: true
 
-      - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./target/site/jacoco/jacoco.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: false
-
-      - name: Archive Test Results
-        if: always()
+      - name: Upload Test Results
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: target/surefire-reports/
-          retention-days: 90
+          path: soft_school/target/surefire-reports/
 
-      - name: Archive Code Coverage Report
-        if: always()
+      - name: Upload Code Coverage Report
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
-          path: target/site/jacoco/
-          retention-days: 90
+          path: soft_school/target/site/jacoco/
 
       - name: Build Docker Image
         if: success()
         run: |
+          cd soft_school
           docker build -t softschool:${{ github.sha }} -t softschool:latest .
           echo "Docker image built successfully"
 
       - name: Publish Unit Test Results
-        if: always()
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          files: target/surefire-reports/*.xml
+          files: soft_school/target/surefire-reports/*.xml
           check_name: Unit Test Results
