@@ -3,6 +3,8 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+$RECYCLE.BIN/
+System Volume Information/
 
 ### STS ###
 .apt_generated
