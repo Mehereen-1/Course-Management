@@ -7,7 +7,8 @@
 4. [File Documentation](#file-documentation)
 5. [Setup Instructions](#setup-instructions)
 6. [Testing Guide](#testing-guide)
-7. [API Documentation](#api-documentation)
+7. [CI/CD with GitHub Actions](#cicd-with-github-actions)
+8. [API Documentation](#api-documentation)
 
 ---
 
@@ -1090,7 +1091,64 @@ See [TESTING_GUIDE.md](TESTING_GUIDE.md) for detailed testing documentation.
 
 ---
 
-## 📚 API Documentation
+## � CI/CD with GitHub Actions
+
+This project includes automated CI/CD pipelines using GitHub Actions to ensure code quality, run tests, and manage releases.
+
+### Workflows Overview
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| **CI Pipeline** | Push to main/develop, PRs to main | Build, test, and generate coverage reports |
+| **Code Quality** | Push to main/develop, PRs to main | SonarQube analysis and dependency scanning |
+| **Release** | Git tag (v*) | Create releases and build Docker images |
+
+### Quick Start
+
+**1. Push code to trigger CI:**
+```bash
+git add .
+git commit -m "Your commit message"
+git push origin main
+```
+
+**2. Monitor build status:**
+- Go to Actions tab on GitHub
+- View real-time logs for each step
+- Download artifacts (test reports, coverage)
+
+**3. Create a release:**
+```bash
+git tag -a v1.0.0 -m "Release version 1.0.0"
+git push origin v1.0.0
+```
+
+### Available Guides
+
+- **[GITHUB_ACTIONS_GUIDE.md](GITHUB_ACTIONS_GUIDE.md)** - Comprehensive documentation of all workflows, configuration, and troubleshooting
+- **[GITHUB_ACTIONS_SETUP.md](GITHUB_ACTIONS_SETUP.md)** - Step-by-step setup and usage guide for developers
+
+### Key Features
+
+✅ **Automatic Testing** - Runs on every push and PR  
+✅ **Code Coverage** - JaCoCo reports uploaded to Codecov  
+✅ **Code Quality** - SonarQube analysis (optional)  
+✅ **Docker Builds** - Automated Docker image creation  
+✅ **Release Management** - Automated release creation with JAR artifacts  
+✅ **Artifact Storage** - 90-day retention for test results and coverage reports  
+
+### GitHub Secrets (Optional)
+
+For code quality analysis, add these secrets to your repository:
+
+1. `SONAR_TOKEN` - From https://sonarcloud.io/account/security/
+2. `SONAR_HOST_URL` - Set to `https://sonarcloud.io`
+
+[Setup instructions in GITHUB_ACTIONS_GUIDE.md](GITHUB_ACTIONS_GUIDE.md#configuration)
+
+---
+
+## �📚 API Documentation
 
 ### Authentication Endpoints
 
