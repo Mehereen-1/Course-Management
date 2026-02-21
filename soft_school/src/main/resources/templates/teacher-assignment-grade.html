@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Grade Assignment - Soft School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="/teacher/dashboard">Soft School - Teacher</a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">Welcome, <span sec:authentication="name">Teacher</span></span>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2>Grade Assignment Submissions</h2>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="/teacher/assignments" class="btn btn-secondary">Back to Assignments</a>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            <strong>Assignment:</strong> Assignment 3 - Exception Handling | <strong>Course:</strong> Introduction to Java | <strong>Max Points:</strong> 100
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Student</th>
+                        <th>Submission Date</th>
+                        <th>Status</th>
+                        <th>Points</th>
+                        <th>Feedback</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mike Johnson</td>
+                        <td>Feb 22, 2026 - 10:30 AM</td>
+                        <td><span class="badge bg-success">On Time</span></td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm" value="92" min="0" max="100" style="width: 70px;">
+                        </td>
+                        <td>
+                            <textarea class="form-control form-control-sm" rows="1" placeholder="Add feedback..."></textarea>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-success">View</button>
+                            <button class="btn btn-sm btn-outline-primary">Save</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Emily Davis</td>
+                        <td>Feb 22, 2026 - 8:45 AM</td>
+                        <td><span class="badge bg-success">On Time</span></td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm" value="88" min="0" max="100" style="width: 70px;">
+                        </td>
+                        <td>
+                            <textarea class="form-control form-control-sm" rows="1" placeholder="Add feedback..."></textarea>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-success">View</button>
+                            <button class="btn btn-sm btn-outline-primary">Save</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex Rivera</td>
+                        <td>Feb 24, 2026 - 11:20 PM</td>
+                        <td><span class="badge bg-warning">Late</span></td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm" value="75" min="0" max="100" style="width: 70px;">
+                        </td>
+                        <td>
+                            <textarea class="form-control form-control-sm" rows="1" placeholder="Add feedback..."></textarea>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-success">View</button>
+                            <button class="btn btn-sm btn-outline-primary">Save</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sarah Chen</td>
+                        <td>Not Submitted</td>
+                        <td><span class="badge bg-danger">Missing</span></td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm" value="0" min="0" max="100" style="width: 70px;">
+                        </td>
+                        <td>
+                            <textarea class="form-control form-control-sm" rows="1" placeholder="Add feedback..."></textarea>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-secondary" disabled>View</button>
+                            <button class="btn btn-sm btn-outline-primary">Save</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <button class="btn btn-success">Save All Grades</button>
+            <button class="btn btn-outline-secondary">Send Feedback to All</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile - Soft School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="/teacher/dashboard">Soft School - Teacher</a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">Welcome, <span sec:authentication="name">Teacher</span></span>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col-md-9">
+                <h2>Teacher Profile</h2>
+            </div>
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
+                <a href="/teacher/dashboard" class="btn btn-secondary">Back</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div style="width: 120px; height: 120px; background-color: #d3d3d3; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                            <i style="font-size: 60px;">👩‍🏫</i>
+                        </div>
+                        <h5 class="card-title">Jane Smith</h5>
+                        <p class="text-muted">jane.smith@school.edu</p>
+                        <p class="text-muted">Emp ID: EMP001</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Personal Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p><strong>Full Name:</strong> Jane Smith</p>
+                                <p><strong>Email:</strong> jane.smith@school.edu</p>
+                                <p><strong>Phone:</strong> (555) 987-6543</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Date of Birth:</strong> March 20, 1985</p>
+                                <p><strong>Employee ID:</strong> EMP001</p>
+                                <p><strong>Joining Date:</strong> September 1, 2015</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Professional Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p><strong>Department:</strong> Computer Science</p>
+                                <p><strong>Title:</strong> Senior Instructor</p>
+                                <p><strong>Qualification:</strong> M.Sc. Computer Science</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Active Courses:</strong> 2</p>
+                                <p><strong>Total Students:</strong> 43</p>
+                                <p><strong>Office Address:</strong> Building A, Room 301</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Contact & Office Hours</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p><strong>Office Phone:</strong> (555) 123-4569</p>
+                                <p><strong>Office Address:</strong> Computer Science Building, Room 301</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Office Hours:</strong> Monday & Wednesday: 2:00 PM - 4:00 PM</p>
+                                <p><strong>Or by appointment:</strong> jane.smith@school.edu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" action="/teacher/profile/update">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" value="(555) 987-6543">
+                        </div>
+                        <div class="mb-3">
+                            <label for="officePhone" class="form-label">Office Phone</label>
+                            <input type="tel" class="form-control" id="officePhone" name="officePhone" value="(555) 123-4569">
+                        </div>
+                        <div class="mb-3">
+                            <label for="officeAddress" class="form-label">Office Address</label>
+                            <input type="text" class="form-control" id="officeAddress" name="officeAddress" value="Computer Science Building, Room 301">
+                        </div>
+                        <div class="mb-3">
+                            <label for="officeHours" class="form-label">Office Hours</label>
+                            <textarea class="form-control" id="officeHours" name="officeHours" rows="3">Monday & Wednesday: 2:00 PM - 4:00 PM
+Or by appointment: jane.smith@school.edu</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

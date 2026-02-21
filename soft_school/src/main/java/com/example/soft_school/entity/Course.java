@@ -12,8 +12,31 @@ public class Course {
 
     private String title;
 
-    @ManyToMany(mappedBy = "courses")
-    private Set<Teacher> teachers;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
-    // getters & setters
+    @ManyToMany
+    @JoinTable(
+        name = "course_enrollments",
+        joinColumns = @JoinColumn(name = "course_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> enrolledStudents;
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
+
+    public String getTitle() { return title; }
+
+    public void setTitle(String title) { this.title = title; }
+
+    public User getOwner() { return owner; }
+
+    public void setOwner(User owner) { this.owner = owner; }
+
+    public Set<User> getEnrolledStudents() { return enrolledStudents; }
+
+    public void setEnrolledStudents(Set<User> enrolledStudents) { this.enrolledStudents = enrolledStudents; }
 }

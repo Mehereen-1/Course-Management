@@ -10,7 +10,7 @@
         <div class="container">
             <a class="navbar-brand" href="/">Soft School - Teacher</a>
             <div class="navbar-nav ms-auto">
-                <span class="navbar-text">Welcome, <span sec:authentication="name"></span></span>
+                <span class="navbar-text me-3">Welcome, <span sec:authentication="name">Teacher</span></span>
                 <a class="nav-link" th:href="@{/logout}">Logout</a>
             </div>
         </div>
@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <h5 class="card-title">My Courses</h5>
                         <p class="card-text">View and manage your courses.</p>
-                        <a href="#" class="btn btn-success">Go</a>
+                        <a href="/teacher/courses" class="btn btn-success">Go</a>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Students</h5>
                         <p class="card-text">View enrolled students.</p>
-                        <a href="#" class="btn btn-success">Go</a>
+                        <a href="/teacher/students" class="btn btn-success">Go</a>
                     </div>
                 </div>
             </div>
@@ -41,9 +41,14 @@
                     <div class="card-body">
                         <h5 class="card-title">Assignments</h5>
                         <p class="card-text">Create and grade assignments.</p>
-                        <a href="#" class="btn btn-success">Go</a>
+                        <a href="/teacher/assignments" class="btn btn-success">Go</a>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <a href="/teacher/profile" class="btn btn-outline-success">View My Profile</a>
             </div>
         </div>
     </div>

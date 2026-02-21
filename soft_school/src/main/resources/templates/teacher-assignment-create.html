@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Assignment - Soft School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="/teacher/dashboard">Soft School - Teacher</a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">Welcome, <span sec:authentication="name">Teacher</span></span>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2>Create New Assignment</h2>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="/teacher/assignments" class="btn btn-secondary">Back to Assignments</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form method="post" action="/teacher/assignments/create" class="needs-validation" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="course" class="form-label">Course</label>
+                        <select class="form-select" id="course" name="course" required>
+                            <option value="">Select Course</option>
+                            <option value="1" th:selected="${courseId} == 1">Introduction to Java</option>
+                            <option value="2" th:selected="${courseId} == 2">Web Development</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Assignment Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="instructions" class="form-label">Instructions</label>
+                        <textarea class="form-control" id="instructions" name="instructions" rows="4" placeholder="Optional detailed instructions..."></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="dueDate" class="form-label">Due Date</label>
+                            <input type="datetime-local" class="form-control" id="dueDate" name="dueDate" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="maxPoints" class="form-label">Max Points</label>
+                            <input type="number" class="form-control" id="maxPoints" name="maxPoints" value="100" min="1" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="assignmentFile" class="form-label">Upload Assignment File (Optional)</label>
+                        <input type="file" class="form-control" id="assignmentFile" name="assignmentFile">
+                        <small class="form-text text-muted">Students will be able to download this file</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="allowLateSubmission" name="allowLateSubmission">
+                            <label class="form-check-label" for="allowLateSubmission">
+                                Allow Late Submissions
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                        <button type="submit" class="btn btn-success">Create Assignment</button>
+                        <a href="/teacher/assignments" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

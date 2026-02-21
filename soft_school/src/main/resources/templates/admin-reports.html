@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>System Reports - Soft School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="container">
+            <a class="navbar-brand" href="/admin/dashboard">Soft School - Admin</a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">Welcome, <span sec:authentication="name">Admin</span></span>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2>System Reports</h2>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="/admin/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Total Users</h6>
+                        <h3 class="card-text">145</h3>
+                        <small class="text-muted">Active users in the system</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Total Courses</h6>
+                        <h3 class="card-text">28</h3>
+                        <small class="text-muted">Courses offered</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Total Enrollments</h6>
+                        <h3 class="card-text">892</h3>
+                        <small class="text-muted">Course enrollments</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Avg. Completion Rate</h6>
+                        <h3 class="card-text">78%</h3>
+                        <small class="text-muted">Course completion</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h5>User Statistics</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p><strong>Administrators:</strong> 5</p>
+                                <p><strong>Teachers:</strong> 32</p>
+                                <p><strong>Students:</strong> 108</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Active Users:</strong> 142</p>
+                                <p><strong>Inactive Users:</strong> 3</p>
+                                <p><strong>New This Month:</strong> 12</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h5>Course Statistics</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p><strong>Active Courses:</strong> 26</p>
+                                <p><strong>Inactive Courses:</strong> 2</p>
+                                <p><strong>Avg. Students/Course:</strong> 32</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Most Popular:</strong> Java</p>
+                                <p><strong>Least Popular:</strong> DBMS</p>
+                                <p><strong>New Courses:</strong> 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h5>Course Performance</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Course Name</th>
+                                    <th>Instructor</th>
+                                    <th>Enrolled</th>
+                                    <th>Completed</th>
+                                    <th>Avg. Grade</th>
+                                    <th>Completion %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Introduction to Java</td>
+                                    <td>Jane Smith</td>
+                                    <td>85</td>
+                                    <td>68</td>
+                                    <td>75.5</td>
+                                    <td>80%</td>
+                                </tr>
+                                <tr>
+                                    <td>Web Development</td>
+                                    <td>John Doe</td>
+                                    <td>62</td>
+                                    <td>52</td>
+                                    <td>82.3</td>
+                                    <td>84%</td>
+                                </tr>
+                                <tr>
+                                    <td>Data Science Basics</td>
+                                    <td>Sarah Johnson</td>
+                                    <td>120</td>
+                                    <td>95</td>
+                                    <td>78.9</td>
+                                    <td>79%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 text-center mb-5">
+            <button class="btn btn-primary">Export Report</button>
+            <button class="btn btn-outline-primary">Print Report</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

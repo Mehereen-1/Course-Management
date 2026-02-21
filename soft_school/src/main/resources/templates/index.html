@@ -10,7 +10,10 @@
         <div class="container">
             <a class="navbar-brand" href="/">Soft School</a>
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                <a class="nav-link" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
+                <a class="nav-link" th:href="@{/signup}" sec:authorize="!isAuthenticated()">Sign Up</a>
+                <a class="nav-link" th:href="@{/dashboard}" sec:authorize="isAuthenticated()">Dashboard</a>
+                <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
             </div>
         </div>
     </nav>
@@ -18,15 +21,24 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <h1>Welcome to Soft School Management System</h1>
-                <p>Your role-based dashboard is ready.</p>
-                <div sec:authorize="hasRole('ADMIN')">
-                    <a href="/admin/dashboard" class="btn btn-primary">Go to Admin Dashboard</a>
+                <p class="lead">A comprehensive course management platform for students, teachers, and administrators.</p>
+                
+                <div class="mt-5" sec:authorize="!isAuthenticated()">
+                    <a href="/login" class="btn btn-primary btn-lg me-2">Login</a>
+                    <a href="/signup" class="btn btn-success btn-lg">Sign Up</a>
                 </div>
-                <div sec:authorize="hasRole('TEACHER')">
-                    <a href="/teacher/dashboard" class="btn btn-success">Go to Teacher Dashboard</a>
-                </div>
-                <div sec:authorize="hasRole('ROLE_STUDENT')">
-                    <a href="/student/dashboard" class="btn btn-info">Go to Student Dashboard</a>
+                
+                <div class="mt-5" sec:authorize="isAuthenticated()">
+                    <p>You are logged in as: <strong sec:authentication="name"></strong></p>
+                    <div sec:authorize="hasRole('ADMIN')">
+                        <a href="/admin/dashboard" class="btn btn-primary btn-lg">Go to Admin Dashboard</a>
+                    </div>
+                    <div sec:authorize="hasRole('TEACHER')">
+                        <a href="/teacher/dashboard" class="btn btn-success btn-lg">Go to Teacher Dashboard</a>
+                    </div>
+                    <div sec:authorize="hasRole('STUDENT')">
+                        <a href="/student/dashboard" class="btn btn-info btn-lg">Go to Student Dashboard</a>
+                    </div>
                 </div>
             </div>
         </div>

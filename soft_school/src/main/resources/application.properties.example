@@ -1,0 +1,11 @@
+spring.application.name=soft-school
+spring.datasource.url=jdbc:postgresql://db:5432/soft_school
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+server.port=8081
+server.address=0.0.0.0
+jwt.secret=c29tZXN1cGVyc2VjdXJlc2VjcmV0a2V5c29tZXN1cGVyc2VjdXJlc2VjcmV0
+jwt.expiration-ms=3600000

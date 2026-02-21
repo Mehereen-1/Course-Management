@@ -1,5 +1,6 @@
 package com.example.soft_school.controller;
 
+import com.example.soft_school.entity.Role;
 import com.example.soft_school.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +31,14 @@ public class SignupController {
             Model model
     ) {
         try {
-            userService.registerUser(username, email, password, role);
+            // Remove "ROLE_" prefix if present and convert to uppercase
+            String cleanRole = role.toUpperCase().replace("ROLE_", "");
+            Role userRole = Role.valueOf(cleanRole);
+            userService.registerUser(username, email, password, userRole);
             return "redirect:/login?registered";
+        } catch (IllegalArgumentException ex) {
+            model.addAttribute("error", "Invalid role selected: " + role);
+            return "signup";
         } catch (Exception ex) {
             model.addAttribute("error", ex.getMessage());
             return "signup";

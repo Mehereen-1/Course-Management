@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details - Soft School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="/teacher/dashboard">Soft School - Teacher</a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">Welcome, <span sec:authentication="name">Teacher</span></span>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2>Course Details - Introduction to Java</h2>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="/teacher/courses/edit?courseId=1" class="btn btn-warning">Edit</a>
+                <a href="/teacher/courses" class="btn btn-secondary">Back to Courses</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Course Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Course Code:</strong> CS101</p>
+                        <p><strong>Credits:</strong> 3</p>
+                        <p><strong>Semester:</strong> Spring 2026</p>
+                        <p><strong>Schedule:</strong> Monday & Wednesday, 10:00 AM - 11:30 AM</p>
+                        <p><strong>Location:</strong> Computer Lab A</p>
+                        <p><strong>Description:</strong> This course provides an introduction to Java programming, covering object-oriented concepts, data structures, and basic algorithms.</p>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Course Content</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h6>Syllabus & Materials</h6>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a href="#">Course Syllabus</a>
+                                    <span class="float-end"><i class="text-primary">📄</i></span>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">Week 1 - Introduction to OOP</a>
+                                    <span class="float-end"><i class="text-primary">📚</i></span>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">Week 2 - Classes and Objects</a>
+                                    <span class="float-end"><i class="text-primary">📚</i></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Enrollment</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Enrolled Students:</strong> 25</p>
+                        <p><strong>Capacity:</strong> 30</p>
+                        <p><strong>Available Seats:</strong> 5</p>
+                        <a href="/teacher/students/course?courseId=1" class="btn btn-sm btn-success w-100">View Students</a>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Quick Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-sm btn-outline-success w-100 mb-2">Send Announcement</button>
+                        <a href="/teacher/assignments?courseId=1" class="btn btn-sm btn-outline-success w-100 mb-2">View Assignments</a>
+                        <a href="/teacher/courses/edit?courseId=1" class="btn btn-sm btn-outline-warning w-100">Edit Course</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

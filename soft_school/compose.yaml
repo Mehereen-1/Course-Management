@@ -1,8 +1,10 @@
+version: '3.8'
+
 services:
   app:
     build: .
     ports:
-      - "9090:8080"
+      - "9090:8081"   # Host:Container
     depends_on:
       - db
     environment:

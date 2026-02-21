@@ -1,5 +1,6 @@
 package com.example.soft_school.service;
 
+import com.example.soft_school.entity.Role;
 import com.example.soft_school.entity.User;
 import com.example.soft_school.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,8 +18,8 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void registerUser(String username, String email,
-                             String password, String role) {
+    public User registerUser(String username, String email,
+                             String password, Role role) {
 
         // prevent duplicate usernames
         if (userRepository.findByUsername(username).isPresent()) {
@@ -29,8 +30,8 @@ public class UserService {
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
-        user.setRole("ROLE_" + role);
+        user.setRole(role);
 
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 }

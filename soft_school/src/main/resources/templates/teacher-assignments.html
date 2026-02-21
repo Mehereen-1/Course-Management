@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignments - Soft School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="/teacher/dashboard">Soft School - Teacher</a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">Welcome, <span sec:authentication="name">Teacher</span></span>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2>My Assignments</h2>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="/teacher/assignments/create" class="btn btn-success">+ Create Assignment</a>
+                <a href="/teacher/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Search assignments...">
+            </div>
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option value="">All Courses</option>
+                    <option value="1">Introduction to Java</option>
+                    <option value="2">Web Development</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Active Assignments</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Assignment</th>
+                            <th>Course</th>
+                            <th>Due Date</th>
+                            <th>Submissions</th>
+                            <th>Graded</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Assignment 3 - Exception Handling</td>
+                            <td>Introduction to Java</td>
+                            <td>Feb 25, 2026</td>
+                            <td>18/25</td>
+                            <td>10/18</td>
+                            <td>
+                                <a href="/teacher/assignments/grade?assignmentId=1" class="btn btn-sm btn-warning">Grade</a>
+                                <a href="#" class="btn btn-sm btn-info">Details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Project 1 - Responsive Website</td>
+                            <td>Web Development</td>
+                            <td>Feb 28, 2026</td>
+                            <td>12/18</td>
+                            <td>5/12</td>
+                            <td>
+                                <a href="/teacher/assignments/grade?assignmentId=2" class="btn btn-sm btn-warning">Grade</a>
+                                <a href="#" class="btn btn-sm btn-info">Details</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Past Assignments</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Assignment</th>
+                            <th>Course</th>
+                            <th>Due Date</th>
+                            <th>Total Submissions</th>
+                            <th>Avg. Grade</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Assignment 1 - Basics</td>
+                            <td>Introduction to Java</td>
+                            <td>Feb 4, 2026</td>
+                            <td>25</td>
+                            <td>86.5</td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-info">View Results</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
